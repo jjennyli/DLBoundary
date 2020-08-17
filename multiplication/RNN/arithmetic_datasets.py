@@ -64,10 +64,10 @@ def gen_data_div(num_examples, range_start, range_end, integers_only=False):
 def gen_data(num_examples, range_start, range_end, integers_only=False):
     num_examples = int(num_examples/4)
     
-    ax, ay = gen_data_add(num_examples, range_start, range_end,integer_only=integer_only)
-    mx, my = gen_data_sub(num_examples, range_start, range_end,integer_only=integer_only)
-    mux, muy = gen_data_mult(num_examples, range_start, range_end,integer_only=integer_only)
-    dx, dy = gen_data_div(num_examples, range_start, range_end,integer_only=integer_only)
+    ax, ay = gen_data_add(num_examples, range_start, range_end,integers_only=integers_only)
+    mx, my = gen_data_sub(num_examples, range_start, range_end,integers_only=integers_only)
+    mux, muy = gen_data_mult(num_examples, range_start, range_end,integers_only=integers_only)
+    dx, dy = gen_data_div(num_examples, range_start, range_end,integers_only=integers_only)
     
     X = np.concatenate((ax, mx, mux, dx))
     y = np.concatenate((ay, my, muy, dy))

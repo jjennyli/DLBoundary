@@ -56,18 +56,22 @@ def gen_data_div(num_examples, range_start, range_end, integers_only=False):
         if integers_only:
             num1 = int(num1)
             num2 = int(num2)
+        
+        if num2 == 0:
+            num2 = 1
 
         X.append([num1,num2,347])        
         y.append(num1/num2)
     return np.array(X), np.array(y)
 
 def gen_data(num_examples, range_start, range_end, integers_only=False):
-    num_examples = int(num_examples/4)
+    num_examples_perOp = int(num_examples/4)    
+    leftovers = num_examples - 4*num_examples_perOp
     
-    ax, ay = gen_data_add(num_examples, range_start, range_end,integer_only=integer_only)
-    mx, my = gen_data_sub(num_examples, range_start, range_end,integer_only=integer_only)
-    mux, muy = gen_data_mult(num_examples, range_start, range_end,integer_only=integer_only)
-    dx, dy = gen_data_div(num_examples, range_start, range_end,integer_only=integer_only)
+    ax, ay = gen_data_add(num_examples_perOp, range_start, range_end,integers_only=integers_only)
+    mx, my = gen_data_sub(num_examples_perOp, range_start, range_end,integers_only=integers_only)
+    mux, muy = gen_data_mult(num_examples_perOp, range_start, range_end,integers_only=integers_only)
+    dx, dy = gen_data_div(num_examples_perOp + leftovers, range_start, range_end,integers_only=integers_only)    
     
     X = np.concatenate((ax, mx, mux, dx))
     y = np.concatenate((ay, my, muy, dy))
